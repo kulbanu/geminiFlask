@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 cors = CORS(app)
-CORS(app, resources={r"/api/answer*": {"origins": ["https://anamenbala.netlify.app/"]}})
+CORS(app, resources={r"/*": {"origins": ["https://anamenbala.netlify.app/"]}})
 model = genai.GenerativeModel('gemini-1.5-flash')
 genai.configure(api_key='AIzaSyC4IfeZfDy-ZgsgGp9od8Xf3jBKmLjtut8')
 @app.route('/api/answer', methods=['POST'])
@@ -14,10 +14,10 @@ def answer():
     print(data)
     prompt = data['prompt']
     response = model.generate_content(prompt)
-    response = jsonify({'response': response.text})
-    response.headers.add('Access-Control-Allow-Origin', 'https://anamenbala.netlify.app/')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
+    result = jsonify({'response': response.text})
+    result.headers.add('Access-Control-Allow-Origin', 'https://anamenbala.netlify.app/')
+    result.headers.add('Access-Control-Allow-Credentials', 'true')
+    return result
 
 if __name__ == '__main__':
     app.run(debug=True)
