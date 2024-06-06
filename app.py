@@ -14,6 +14,7 @@ def answer():
     print(data)
     prompt = data['prompt']
     response = model.generate_content(prompt)
+    response.headers.add('Access-Control-Allow-Origin', 'https://anamenbala.netlify.app/*')
     return jsonify({'response': response.text})
 
 if __name__ == '__main__':
