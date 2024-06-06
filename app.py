@@ -4,7 +4,7 @@ import google.generativeai as genai
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/answer*": {"origins": "*"}})
+CORS(app, resources={r"/api/answer*": {"origins": "https://anamenbala.netlify.app/"}})
 model = genai.GenerativeModel('gemini-1.5-flash')
 genai.configure(api_key='AIzaSyC4IfeZfDy-ZgsgGp9od8Xf3jBKmLjtut8')
 @app.route('/api/answer', methods=['POST'])
